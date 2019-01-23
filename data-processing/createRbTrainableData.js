@@ -15,39 +15,39 @@ var rbTest = {
 }
 
 rbDataDrafted.forEach((el, i) => {
-   let collegeNumber = collegesArray.indexOf(el.college);
    // Build the training data
-   if (i < rbDataDrafted.length - 10) {
-      rbTrain.features.push(
-         collegeNumber,
-         el.heightinchestotal ?  el.heightinchestotal : averages.heightinchestotalAve,
-         el.weight ? el.weight : averages.weightAve,
-         el.fortyyd ? el.fortyyd : averages.fortyydAve,
-         el.twentyss ? el.twentyss : averages.twentyssAve,
-         el.threecone ? el.threecone : averages.threeconeAve,
-         el.vertical ? el.vertical : averages.verticalAve,
-         el.broad ? el.broad : averages.broadAve,
-         el.bench ? el.bench : averages.benchAve
-      );
-      rbTrain.output.push(el.picktotal);
-   } else 
-   // Build the tesing data
-   {
-      rbTest.features.push(
-         collegeNumber,
-         el.heightinchestotal ?  el.heightinchestotal : averages.heightinchestotalAve,
-         el.weight ? el.weight : averages.weightAve,
-         el.fortyyd ? el.fortyyd : averages.fortyydAve,
-         el.twentyss ? el.twentyss : averages.twentyssAve,
-         el.threecone ? el.threecone : averages.threeconeAve,
-         el.vertical ? el.vertical : averages.verticalAve,
-         el.broad ? el.broad : averages.broadAve,
-         el.bench ? el.bench : averages.benchAve
-      );
-      rbTest.output.push(el.picktotal);
+   if (!(el.fortyyd === 0 && el.twentyss === 0 && el.threecone === 0 && el.vertical === 0 && el.broad === 0)) {
+      if (i < rbDataDrafted.length - 10) {
+         rbTrain.features.push(
+            el.heightinchestotal ?  el.heightinchestotal - averages.heightinchestotalAve : 0,
+            el.weight ? el.weight - averages.weightAve : 0,
+            el.fortyyd ? el.fortyyd - averages.fortyydAve : 0,
+            el.twentyss ? el.twentyss - averages.twentyssAve : 0,
+            el.threecone ? el.threecone - averages.threeconeAve : 0,
+            el.vertical ? el.vertical - averages.verticalAve : 0,
+            el.broad ? el.broad - averages.broadAve : 0,
+            el.bench ? el.bench - averages.benchAve : 0
+         );
+         rbTrain.output.push(el.picktotal);
+      } else 
+      // Build the tesing data
+      {
+         rbTest.features.push(
+            el.heightinchestotal ?  el.heightinchestotal - averages.heightinchestotalAve : 0,
+            el.weight ? el.weight - averages.weightAve : 0,
+            el.fortyyd ? el.fortyyd - averages.fortyydAve : 0,
+            el.twentyss ? el.twentyss - averages.twentyssAve : 0,
+            el.threecone ? el.threecone - averages.threeconeAve : 0,
+            el.vertical ? el.vertical - averages.verticalAve : 0,
+            el.broad ? el.broad - averages.broadAve : 0,
+            el.bench ? el.bench - averages.benchAve : 0
+         );
+         rbTest.output.push(el.picktotal);
+      }
    }
 })
 
+console.log('Number of rbDataDrafted: ', rbDataDrafted.length);
 console.log('Train data: ', rbTrain.features.length, rbTrain.output.length);
 console.log('Test data: ', rbTest.features.length, rbTest.output.length);
 

@@ -49,5 +49,5 @@ console.log('Number of qbDataDrafted: ', qbDataDrafted.length);
 console.log('Train data: ', qbTrain.features.length, qbTrain.output.length);
 console.log('Test data: ', qbTest.features.length, qbTest.output.length);
 
-// fs.writeFileSync('../data/qb/qbTrain.json', JSON.stringify(qbTrain));
-// fs.writeFileSync('../data/qb/qbTest.json', JSON.stringify(qbTest));
+fs.writeFileSync('../data/qb/qbTrain.json', JSON.stringify(qbTrain));
+fs.writeFileSync('../data/qb/qbTest.json', JSON.stringify(qbTest));
