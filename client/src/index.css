@@ -7,6 +7,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width:330px;
+  width: auto !important;
+  width:330px;
 }
 
 h1 {
@@ -27,6 +30,11 @@ hr {
   width: 30%;
   margin-left: 0px;
   margin-bottom: 20px;
+}
+
+img {
+  max-width: 200px;
+  margin: 20px;
 }
 
 .title-main{
@@ -56,6 +64,8 @@ hr {
 .content {
   background-color: white;
   padding-top: 40px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   border-radius: 8px;
 }
+
+::-webkit-input-placeholder { text-align:right; }
