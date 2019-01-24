@@ -14,10 +14,13 @@ class NavBar extends Component {
    }
 
    componentDidMount() {
-      var pathname = this.props.location.pathname.substring(1);
-      $('.nav-link').removeClass('active');
-      $(`#${pathname}`).addClass('active');
+      if(this.props.location.pathname !== '/') {
+         var pathname = this.props.location.pathname.substring(1);
+         $('.nav-link').removeClass('active');
+         $(`#${pathname}`).addClass('active');
+      }
    }
+
 
    render() {
    return (
