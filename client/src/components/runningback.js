@@ -16,14 +16,19 @@ class Runningback extends Component {
        bench: 20.43
     }, 
     "result": null,
-    "url": "http://localhost:7000/api/predict/rb"
+    "url": "http://localhost:7000/api/predict/rb",
+    "presetPlayer": false,
+    "message": ''   
  };
 
    resetInputFont = () => {
-      $(":input").css({
+     // User changed inputs sytling is reset
+     $(":input").css({
          "color": "black",
          "font-weight": "normal"
       })
+      // Prevents the results of a previous prediction from staying on the screen
+      this.setState({ result: null });
    }
 
   onInputChange = (target) => {
@@ -32,6 +37,7 @@ class Runningback extends Component {
     this.setState({ input });
     target.style.color = 'darkblue';
     target.style['font-weight'] = 'bold';
+    this.setState({ presetPlayer: false });
   }
 
   handleSubmit = () => {
@@ -70,7 +76,8 @@ class Runningback extends Component {
        broad: 132,
        bench: 17
     };
-    this.setState({ input: stats });
+    var message = "Round 1, #17 overall by Falcons";
+    this.setState({ input: stats, presetPlayer: true, message: message });
  }
 
  loadNoahHerron = () => {
@@ -86,7 +93,8 @@ class Runningback extends Component {
       broad: 108,
       bench: 17
     };
-    this.setState({ input: stats });
+    var message = "Round 7, #244 overall by Steelers";
+    this.setState({ input: stats, presetPlayer: true, message: message });
  }
 
  loadKenyanDrake = () => {
@@ -102,14 +110,15 @@ class Runningback extends Component {
        broad: 123,
        bench: 10
     };
-    this.setState({ input: stats });
+    var message = "Round 3, #73 overall by Dolphins";
+    this.setState({ input: stats, presetPlayer: true, message: message });
  }
 
   render() {
     return (
       <div className="container content"> 
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around player-wrapper">
+         <div className="row justify-content-around button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKeanuNeal} data-toggle="tooltip"  title="Round 1, Overall Pick 17 by Falcons">Keanu Neal</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
@@ -201,9 +210,14 @@ class Runningback extends Component {
             <div className='row justify-content-center'>
                <button onClick={()=>this.handleSubmit()} type="button" className="btn btn-success">Predict!</button> 
             </div>  
-            {this.state.result ? (
-               <p className='results'>Predict: round <strong>{this.state.result.round}</strong>, #{Math.round(this.state.result.pick)} overall</p>
-            ) : null}
+            {
+               this.state.presetPlayer ? (
+               <p className='results'>Actual: {this.state.message}</p>) : null
+            }
+            {
+               this.state.result ? (
+               <p className='results'>Predicted: Round {this.state.result.round}, #{Math.round(this.state.result.pick)} overall</p>) : null
+            }
          </div> 
       </div>
     );

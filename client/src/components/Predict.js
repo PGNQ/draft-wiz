@@ -17,7 +17,8 @@ class Predict extends Component {
   render() {
     return (
       <div className="container content">
-        <div className="row justify-content-around">
+        <h6 className="text-center">To get started, select a position.</h6>
+        <div className="row justify-content-around button-wrapper">
           <button type="button" className="btn btn-outline-primary btn-sm" value="qb" onClick={(e) => this.onClick(e)}>Quarterback</button>
           <button type="button" className="btn btn-outline-primary btn-sm" value="rb" onClick={(e) => this.onClick(e)}>Running Back</button>
           <button type="button" className="btn btn-outline-primary btn-sm" value="wr" onClick={(e) => this.onClick(e)}>Wide Receiver</button>

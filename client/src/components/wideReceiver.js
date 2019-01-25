@@ -16,14 +16,19 @@ class WideReceiver extends Component {
        bench: 15.21
     }, 
     "result": null,
-    "url": "http://localhost:7000/api/predict/wr"
+    "url": "http://localhost:7000/api/predict/wr",
+    "presetPlayer": false,
+    "message": ''
  };
 
   resetInputFont = () => {
-    $(":input").css({
-      "color": "black",
-      "font-weight": "normal"
-    })
+      // User changed inputs sytling is reset
+      $(":input").css({
+         "color": "black",
+         "font-weight": "normal"
+      })
+      // Prevents the results of a previous prediction from staying on the screen
+      this.setState({ result: null });
   }
 
   onInputChange = (target) => {
@@ -32,6 +37,7 @@ class WideReceiver extends Component {
     this.setState({ input });
     target.style.color = 'darkblue';
     target.style['font-weight'] = 'bold';
+    this.setState({ presetPlayer: false });
   }
 
   handleSubmit = () => {
@@ -70,7 +76,8 @@ class WideReceiver extends Component {
       broad: 128,
       bench: 15.21
     };
-    this.setState({ input: stats });
+    var message = "Round 2, #35 overall by Eagles";
+    this.setState({ input: stats, presetPlayer: true, message: message });
   }
 
   loadKevinNorwood = () => {
@@ -86,7 +93,8 @@ class WideReceiver extends Component {
       broad: 121,
       bench: 8
     };
-    this.setState({ input: stats });
+    var message = "Round 4, #123 overall by Seahawks";
+    this.setState({ input: stats, presetPlayer: true, message: message });
   }
 
   loadAntonioBrown = () => {
@@ -102,14 +110,15 @@ class WideReceiver extends Component {
       broad: 105,
       bench: 13
     };
-    this.setState({ input: stats });
+    var message = "Round 6, #195 overall by Steelers";
+    this.setState({ input: stats, presetPlayer: true, message: message });
   }
 
   render() {
     return (
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around player-wrapper">
+         <div className="row justify-content-around button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadReggieBrown} data-toggle="tooltip"  title="Round 2, Overall Pick 35 by Eagles">Reggie Brown</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKevinNorwood} data-toggle="tooltip"  title="Round 4, Overall Pick 123 by Seahawks">Kevin Norwood</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadAntonioBrown} data-toggle="tooltip"  title="Round 6, Overall Pick 195 by Steelers">Antonio Brown</button>
@@ -201,9 +210,14 @@ class WideReceiver extends Component {
             <div className='row justify-content-center'>
                <button onClick={()=>this.handleSubmit()} type="button" className="btn btn-success">Predict!</button> 
             </div>  
-            {this.state.result ? (
-               <p className='results'>Predict: round <strong>{this.state.result.round}</strong>, #{Math.round(this.state.result.pick)} overall</p>
-            ) : null}
+            {
+               this.state.presetPlayer ? (
+               <p className='results'>Actual: {this.state.message}</p>) : null
+            }
+            {
+               this.state.result ? (
+               <p className='results'>Predicted: Round {this.state.result.round}, #{Math.round(this.state.result.pick)} overall</p>) : null
+            }
          </div> 
       </div>
     );

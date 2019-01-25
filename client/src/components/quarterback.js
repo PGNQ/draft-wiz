@@ -15,14 +15,19 @@ class Quarterback extends Component {
          broad: 110.67
       }, 
       "result": null,
-      "url": "http://localhost:7000/api/predict/qb"
+      "url": "http://localhost:7000/api/predict/qb",
+      "presetPlayer": false,
+      "message": ''
    };
 
    resetInputFont = () => {
+      // User changed inputs sytling is reset
       $(":input").css({
          "color": "black",
          "font-weight": "normal"
       })
+      // Prevents the results of a previous prediction from staying on the screen
+      this.setState({ result: null });
    }
 
    onInputChange = (target) => {
@@ -31,6 +36,7 @@ class Quarterback extends Component {
       this.setState({ input });
       target.style.color = 'darkblue';
       target.style['font-weight'] = 'bold';
+      this.setState({ presetPlayer: false });
    }
 
    handleSubmit = () => {
@@ -68,7 +74,8 @@ class Quarterback extends Component {
          vertical: 24.5,
          broad: 99
       };
-      this.setState({ input: stats });
+      var message = "Round 6, #199 overall by Patriots";
+      this.setState({ input: stats, presetPlayer: true, message: message });
    }
 
    loadDrewBrees = () => {
@@ -83,7 +90,8 @@ class Quarterback extends Component {
          vertical: 32,
          broad: 105
       };
-      this.setState({ input: stats });
+      var message = "Round 2, #32 overall by Chargers";
+      this.setState({ input: stats, presetPlayer: true, message: message });
    }
 
    loadCamNewton = () => {
@@ -98,14 +106,15 @@ class Quarterback extends Component {
          vertical: 35,
          broad: 126
       };
-      this.setState({ input: stats });
+      var message = "Round 1, #1 overall by Panthers";
+      this.setState({ input: stats, presetPlayer: true, message: message });
    }
 
   render() {
     return (
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around player-wrapper">
+         <div className="row justify-content-around button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
@@ -187,9 +196,14 @@ class Quarterback extends Component {
             <div className='row justify-content-center'>
                <button onClick={()=>this.handleSubmit()} type="button" className="btn btn-success">Predict!</button> 
             </div>  
-            {this.state.result ? (
-               <p className='results'>Predict: round <strong>{this.state.result.round}</strong>, #{Math.round(this.state.result.pick)} overall</p>
-            ) : null}
+            {
+               this.state.presetPlayer ? (
+               <p className='results'>Actual: {this.state.message}</p>) : null
+            }
+            {
+               this.state.result ? (
+               <p className='results'>Predicted: Round {this.state.result.round}, #{Math.round(this.state.result.pick)} overall</p>) : null
+            }
          </div> 
       </div>
     );
