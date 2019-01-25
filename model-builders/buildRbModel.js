@@ -38,11 +38,11 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 
 (async function () {
 // Train the model using the data.
-  const history = await model.fit(inputTrain, outputTrain, { epochs: 500});
+  const history = await model.fit(inputTrain, outputTrain, { epochs: 5000});
   console.log(history);
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {
   console.log('training complete');
   model.predict(tf.tensor(test.features, [10, 8])).print();
-//   model.save('file://../tensorflow-models/rb-model');
+  // model.save('file://../tensorflow-models/rb-model');
 })

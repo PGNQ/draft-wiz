@@ -14,11 +14,6 @@ app.use(function( req, res, next) {
 app.use(express.static("./static"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-   // res.append('Access-Control-Allow-Headers', ['email', 'Authorization', 'x-forwarded-proto', 'host']);
-   //res.append('Content-Type','application/json');
-   next();
- });
 app.use(cors());
 
 
@@ -33,8 +28,8 @@ var wrModel;
 (async function () {
    console.log('Loading models');
    qbModel = await tf.loadModel('file://./tensorflow-models/qb-model/model.JSON');
-   // rbModel = await tf.loadModel('file://./tensorflow-models/rb-model/model.JSON');
-   // wrModel = await tf.loadModel('file://./tensorflow-models/wr-model/model.JSON');
+   rbModel = await tf.loadModel('file://./tensorflow-models/rb-model/model.JSON');
+   wrModel = await tf.loadModel('file://./tensorflow-models/wr-model/model.JSON');
    console.log('Models loaded');
 
    //only start the server once the models are loaded
@@ -44,7 +39,6 @@ var wrModel;
 })()
 
 
-// Routes
 
 app.post('/api/predict/:position', (req, res) => {
    
@@ -58,12 +52,12 @@ app.post('/api/predict/:position', (req, res) => {
       modelAve = qbAve;
    } else 
    if (position === 'rb') {
-      // model = rbModel;
-      // modelAve = rbAve;
+      model = rbModel;
+      modelAve = rbAve;
    } else
    if (position === 'wr') {
-      // model = wrModel;
-      // modelAve = wrAve;
+      model = wrModel;
+      modelAve = wrAve;
    }
 
    var height = parseInt(req.body.height);

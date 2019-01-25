@@ -44,7 +44,7 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 })().then(()=> {
   console.log('training complete');
   model.predict(tf.tensor(test.features, [10, 7])).print();
-  model.save('file://../tensorflow-models/qb-model');
+  // model.save('file://../tensorflow-models/qb-model');
 })
 
 
