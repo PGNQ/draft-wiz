@@ -77,7 +77,7 @@ input {
 }
 
 .input-container {
-  max-width: 400px;
+  max-width: 450px;
 }
 
 .input-message {
@@ -85,6 +85,10 @@ input {
   margin-bottom: 2px;
   font-weight: lighter;
   font-style: italic;
+}
+
+.input-group-text {
+  min-width: 150px;
 }
 
 .results {

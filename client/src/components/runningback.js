@@ -19,12 +19,12 @@ class Runningback extends Component {
     "url": "http://localhost:7000/api/predict/rb"
  };
 
- resetInputFont = () => {
-    $(":input").css({
-      "color": "black",
-      "font-weight": "normal"
-    })
-  }
+   resetInputFont = () => {
+      $(":input").css({
+         "color": "black",
+         "font-weight": "normal"
+      })
+   }
 
   onInputChange = (target) => {
     var input = {...this.state.input}
@@ -99,7 +99,8 @@ class Runningback extends Component {
        twentyss: 4.21,
        threecone: 7.04,
        vertical: 34.5,
-       broad: 123
+       broad: 123,
+       bench: 10
     };
     this.setState({ input: stats });
  }
