@@ -1,78 +1,207 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import $ from 'jquery';
 
 class Runningback extends Component {
 
   state = {
-    baseUrl: "http://localhost:7000/api/predict/rb",
-  };
+    "input": {
+       height: 70.8,
+       weight: 214.4,
+       forty: 4.53,
+       twentyss: 4.23,
+       threecone: 6.99,
+       vertical: 35.10,
+       broad: 118.87,
+       bench: 20.43
+    }, 
+    "result": null,
+    "url": "http://localhost:7000/api/predict/rb"
+ };
+
+ resetInputFont = () => {
+    $(":input").css({
+      "color": "black",
+      "font-weight": "normal"
+    })
+  }
+
+  onInputChange = (target) => {
+    var input = {...this.state.input}
+    input[target.id] = parseFloat(target.value) || '';
+    this.setState({ input });
+    target.style.color = 'darkblue';
+    target.style['font-weight'] = 'bold';
+  }
+
+  handleSubmit = () => {
+    // Checking to see all input fields have a number in them
+    var allNumbers = Object.values(this.state.input).reduce((isNumber, element) => {return isNumber && typeof element === 'number'}, true);
+
+    if (allNumbers){
+       fetch(this.state.url, {
+          method: 'POST',
+          body: JSON.stringify(this.state.input),
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => res.json())
+          .then(response => {
+            this.setState({ result: response });
+          })
+          .catch(() => console.log('Server error has occurred.'));
+    } else {
+       alert('Please fill out all input boxes.')
+    }
+  }
+
+  loadTomBrady = () => {
+
+    this.resetInputFont();
+    var stats = {
+       height: 76,
+       weight: 211,
+       forty: 5.24,
+       twentyss: 4.38,
+       threecone: 7.20,
+       vertical: 24.5,
+       broad: 99
+    };
+    this.setState({ input: stats });
+ }
+
+ loadDrewBrees = () => {
+
+    this.resetInputFont();
+    var stats = {
+       height: 74,
+       weight: 213,
+       forty: 4.83,
+       twentyss: 4.21,
+       threecone: 7.09,
+       vertical: 32,
+       broad: 105
+    };
+    this.setState({ input: stats });
+ }
+
+ loadCamNewton = () => {
+
+    this.resetInputFont();
+    var stats = {
+       height: 77,
+       weight: 248,
+       forty: 4.6,
+       twentyss: 4.18,
+       threecone: 6.92,
+       vertical: 35,
+       broad: 126
+    };
+    this.setState({ input: stats });
+ }
 
   render() {
-    console.log(this.state);
     return (
-      <div className="container content">      
+      <div className="container content"> 
+         <h6 className="text-center">Load existing player or create your own!</h6>
+         <div className="row justify-content-around player-wrapper">
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
+         </div>     
          <img className="mx-auto d-block" src="https://images-na.ssl-images-amazon.com/images/I/417Yg63btmL._SX425_.jpg"  alt="runningback"></img>
          <div className="container input-container">
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">Height (in)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 71'/>
-          </div>
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">Weight (lbs)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 214'/>
-          </div>  
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">40-yard dash (sec)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 4.5'/>
-          </div>  
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">20-yard shuttle (sec)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"  
-              placeholder='Ave: 4.2'/>
-          </div>  
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">3 cone drill (sec)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 7.0'/>
-          </div>  
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">Vertical jump (in)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 35'/>
-          </div>  
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">Broad jump (in)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 119'/>
-          </div>   
-          <div className="input-group input-group-sm mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroup-sizing-sm">Bench press (reps)</span>
-              </div>
-              <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-              placeholder='Ave: 20'/>
-          </div>   
-          <div className='row justify-content-center'>
-              <button type="button" className="btn btn-success">Predict!</button> 
-          </div>  
-         </div>
+            <p className="input-message">Please complete all fields with numbers only.</p>
+            <p className="input-message">Fields preloaded with average values from 1999-2015.</p>
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">Height (in)</span>
+               </div>
+               <input 
+                  id="height" type="number" step="any" className="form-control" 
+                  value={this.state.input.height}
+                  onChange={event => this.onInputChange(event.target)}  
+               />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">Weight (lbs)</span>
+               </div>
+               <input 
+                  id="weight" type="number" step="any" className="form-control" 
+                  value={this.state.input.weight}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>  
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">40-yard dash (sec)</span>
+               </div>
+               <input 
+                  id="forty" type="number" step="any" className="form-control" 
+                  value={this.state.input.forty}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>  
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">20-yard shuttle (sec)</span>
+               </div>
+               <input 
+                  id="twentyss" type="number" step="any" className="form-control" 
+                  value={this.state.input.twentyss}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>  
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">3 cone drill (sec)</span>
+               </div>
+               <input 
+                  id="threecone" type="number" step="any" className="form-control" 
+                  value={this.state.input.threecone}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>  
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">Vertical jump (in)</span>
+               </div>
+               <input 
+                  id="vertical" type="number" step="any" className="form-control" 
+                  value={this.state.input.vertical}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>  
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">Broad jump (in)</span>
+               </div>
+               <input 
+                  id="broad" type="number" step="any" className="form-control" 
+                  value={this.state.input.broad}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+               <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroup-sizing-sm">Bench Press (reps)</span>
+               </div>
+               <input 
+                  id="bench" type="number" step="any" className="form-control" 
+                  value={this.state.input.bench}
+                  onChange={event => this.onInputChange(event.target)}
+               />
+            </div>    
+            <div className='row justify-content-center'>
+               <button onClick={()=>this.handleSubmit()} type="button" className="btn btn-success">Predict!</button> 
+            </div>  
+            {this.state.result ? (
+               <p className='results'>Predict: round <strong>{this.state.result.round}</strong>, #{Math.round(this.state.result.pick)} overall</p>
+            ) : null}
+         </div> 
       </div>
     );
   }

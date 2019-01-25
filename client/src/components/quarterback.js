@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import $ from 'jquery';
 
 class Quarterback extends Component {
 
   state = {
       "input": {
-         height: 75,
-         weight: 224,
-         forty: 4.8,
-         twentyss: 4.3,
-         threecone: 7.1,
-         vertical: 32,
-         broad: 110
+         height: 75.2,
+         weight: 224.0,
+         forty: 4.81,
+         twentyss: 4.30,
+         threecone: 7.13,
+         vertical: 31.66,
+         broad: 110.67
       }, 
       "result": null,
-      "url": "http://localhost:7000/api/predictQB"
+      "url": "http://localhost:7000/api/predict/qb"
    };
+
+   resetInputFont = () => {
+      $(":input").css({
+         "color": "black",
+         "font-weight": "normal"
+      })
+   }
 
    onInputChange = (target) => {
       var input = {...this.state.input}
@@ -49,7 +57,8 @@ class Quarterback extends Component {
    }
 
    loadTomBrady = () => {
-      // Round 6, Overall Pick 199 by Patriots
+
+      this.resetInputFont();
       var stats = {
          height: 76,
          weight: 211,
@@ -63,7 +72,8 @@ class Quarterback extends Component {
    }
 
    loadDrewBrees = () => {
-      // Round 2, Overall Pick 32 by Chargers
+
+      this.resetInputFont();
       var stats = {
          height: 74,
          weight: 213,
@@ -77,7 +87,8 @@ class Quarterback extends Component {
    }
 
    loadCamNewton = () => {
-      // Round 1, Overall Pick 1 by Panthers
+
+      this.resetInputFont();
       var stats = {
          height: 77,
          weight: 248,
