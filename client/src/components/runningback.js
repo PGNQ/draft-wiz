@@ -57,18 +57,18 @@ class Runningback extends Component {
     }
   }
 
-  loadLeVeonBell = () => {
+  loadKeanuNeal = () => {
 
     this.resetInputFont();
     var stats = {
-       height: 73,
-       weight: 230,
-       forty: 4.60,
-       twentyss: 4.24,
-       threecone: 6.75,
-       vertical: 31.5,
-       broad: 118,
-       bench: 24
+       height: 72,
+       weight: 211,
+       forty: 4.62,
+       twentyss: 4.38,
+       threecone: 7.09,
+       vertical: 38.0,
+       broad: 132,
+       bench: 17
     };
     this.setState({ input: stats });
  }
@@ -109,7 +109,7 @@ class Runningback extends Component {
       <div className="container content"> 
          <h6 className="text-center">Load existing player or create your own!</h6>
          <div className="row justify-content-around player-wrapper">
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadLeVeonBell} data-toggle="tooltip"  title="Round 2, Overall Pick 48 by Steelers">Le'Veon Bell</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKeanuNeal} data-toggle="tooltip"  title="Round 1, Overall Pick 17 by Falcons">Keanu Neal</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
          </div>     
