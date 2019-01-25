@@ -57,47 +57,49 @@ class Runningback extends Component {
     }
   }
 
-  loadTomBrady = () => {
+  loadLeVeonBell = () => {
 
     this.resetInputFont();
     var stats = {
-       height: 76,
-       weight: 211,
-       forty: 5.24,
-       twentyss: 4.38,
-       threecone: 7.20,
-       vertical: 24.5,
-       broad: 99
+       height: 73,
+       weight: 230,
+       forty: 4.60,
+       twentyss: 4.24,
+       threecone: 6.75,
+       vertical: 31.5,
+       broad: 118,
+       bench: 24
     };
     this.setState({ input: stats });
  }
 
- loadDrewBrees = () => {
+ loadNoahHerron = () => {
 
     this.resetInputFont();
     var stats = {
-       height: 74,
-       weight: 213,
-       forty: 4.83,
+      height: 71,
+      weight: 224,
+      forty: 4.60,
+      twentyss: 3.97,
+      threecone: 6.95,
+      vertical: 31.0,
+      broad: 108,
+      bench: 17
+    };
+    this.setState({ input: stats });
+ }
+
+ loadKenyanDrake = () => {
+
+    this.resetInputFont();
+    var stats = {
+       height: 73,
+       weight: 210,
+       forty: 4.45,
        twentyss: 4.21,
-       threecone: 7.09,
-       vertical: 32,
-       broad: 105
-    };
-    this.setState({ input: stats });
- }
-
- loadCamNewton = () => {
-
-    this.resetInputFont();
-    var stats = {
-       height: 77,
-       weight: 248,
-       forty: 4.6,
-       twentyss: 4.18,
-       threecone: 6.92,
-       vertical: 35,
-       broad: 126
+       threecone: 7.04,
+       vertical: 34.5,
+       broad: 123
     };
     this.setState({ input: stats });
  }
@@ -107,9 +109,9 @@ class Runningback extends Component {
       <div className="container content"> 
          <h6 className="text-center">Load existing player or create your own!</h6>
          <div className="row justify-content-around player-wrapper">
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadLeVeonBell} data-toggle="tooltip"  title="Round 2, Overall Pick 48 by Steelers">Le'Veon Bell</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
          </div>     
          <img className="mx-auto d-block" src="https://images-na.ssl-images-amazon.com/images/I/417Yg63btmL._SX425_.jpg"  alt="runningback"></img>
          <div className="container input-container">
