@@ -14,6 +14,7 @@ body {
 
 h1 {
   font-size: 50px;
+  letter-spacing: 6px;
   color: rgb(255, 255, 255);
   padding-left: 10px;
 }
@@ -24,10 +25,11 @@ h2 {
 
 p {
   margin-bottom: 0;
+  font-size: 14px;
 }
 
 hr {
-  width: 30%;
+  width: 40%;
   margin-left: 0px;
   margin-bottom: 20px;
 }
@@ -35,6 +37,12 @@ hr {
 img {
   max-width: 200px;
   margin: 20px;
+}
+
+input {
+  text-align: right;
+  color: red;
+  font-weight: 100;
 }
 
 .title-main{
@@ -62,14 +70,27 @@ img {
 }
 
 .content {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   padding-top: 40px;
   padding-bottom: 40px;
   border-radius: 8px;
 }
 
 .input-container {
-  max-width: 500px;
+  max-width: 400px;
+}
+
+.input-message {
+  text-align: center;
+  margin-bottom: 2px;
+  font-weight: lighter;
+  font-style: italic;
 }
 
 ::-webkit-input-placeholder { text-align:right; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

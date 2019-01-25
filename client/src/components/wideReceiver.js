@@ -69,7 +69,9 @@ class WideReceiver extends Component {
               <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
               placeholder='Ave: 15'/>
           </div>   
-          <button type="button" className="btn btn-success">Predict!</button> 
+          <div className='row justify-content-center'>
+            <button type="button" className="btn btn-success">Predict!</button> 
+          </div>  
          </div>
       </div>
     );
