@@ -40,7 +40,6 @@ class Quarterback extends Component {
           })
             .then(res => res.json())
             .then(response => {
-              console.log(response)
               this.setState({ result: response });
             })
             .catch(() => console.log('Server error has occurred.'));
@@ -49,9 +48,57 @@ class Quarterback extends Component {
       }
    }
 
+   loadTomBrady = () => {
+      // Round 6, Overall Pick 199 by Patriots
+      var stats = {
+         height: 76,
+         weight: 211,
+         forty: 5.24,
+         twentyss: 4.38,
+         threecone: 7.20,
+         vertical: 24.5,
+         broad: 99
+      };
+      this.setState({ input: stats });
+   }
+
+   loadDrewBrees = () => {
+      // Round 2, Overall Pick 32 by Chargers
+      var stats = {
+         height: 74,
+         weight: 213,
+         forty: 4.83,
+         twentyss: 4.21,
+         threecone: 7.09,
+         vertical: 32,
+         broad: 105
+      };
+      this.setState({ input: stats });
+   }
+
+   loadCamNewton = () => {
+      // Round 1, Overall Pick 1 by Panthers
+      var stats = {
+         height: 77,
+         weight: 248,
+         forty: 4.6,
+         twentyss: 4.18,
+         threecone: 6.92,
+         vertical: 35,
+         broad: 126
+      };
+      this.setState({ input: stats });
+   }
+
   render() {
     return (
       <div className="container content">
+         <h6 className="text-center">Load existing player or create your own!</h6>
+         <div className="row justify-content-around player-wrapper">
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
+            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
+         </div>
          <img className="mx-auto d-block" src="https://i.pinimg.com/originals/bb/a7/2f/bba72fb432a4f2050539818b0152bead.jpg"  alt="quarterback"></img> 
          <div className="container input-container">
             <p className="input-message">Please complete all fields with numbers only.</p>
