@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const tf = require('@tensorflow/tfjs-node');
 const port = process.env.PORT || 7000;
 const fs = require('fs');
+const cors = require('cors');
 const qbAve = JSON.parse(fs.readFileSync('./data/qb/qbDraftedAverages.JSON'));
 
 
@@ -15,6 +16,12 @@ app.use(function( req, res, next) {
 app.use(express.static("./static"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+   // res.append('Access-Control-Allow-Headers', ['email', 'Authorization', 'x-forwarded-proto', 'host']);
+   //res.append('Content-Type','application/json');
+   next();
+ });
+app.use(cors());
 
 
 // Load all models and start the server

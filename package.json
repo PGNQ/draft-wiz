@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@tensorflow/tfjs-node": "^0.2.3",
+    "cors": "^2.8.5",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   }
