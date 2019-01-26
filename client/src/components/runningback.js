@@ -118,7 +118,7 @@ class Runningback extends Component {
     return (
       <div className="container content"> 
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around button-wrapper">
+         <div className="row button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKeanuNeal} data-toggle="tooltip"  title="Round 1, Overall Pick 17 by Falcons">Keanu Neal</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>

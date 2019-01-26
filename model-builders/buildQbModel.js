@@ -1,7 +1,7 @@
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs');
-const train = JSON.parse(fs.readFileSync('../data/qb/qbTrain.JSON'));
-const test = JSON.parse(fs.readFileSync('../data/qb/qbTest.JSON'));
+const train = JSON.parse(fs.readFileSync('../data/qb/qbTrainMinMax.JSON'));
+const test = JSON.parse(fs.readFileSync('../data/qb/qbTestMinMax.JSON'));
 
 // Define a model
 const model = tf.sequential();
@@ -10,18 +10,17 @@ const model = tf.sequential();
 model.add(tf.layers.dense({
   units: 10, 
   inputShape: [train.numberOfFeatures],
-  activation: 'sigmoid',
-  kernelInitializer: 'randomNormal'
+  activation: 'relu6',
+  // kernelInitializer: 'glorotNormal'
 }));
 
 // add output layer
 model.add(tf.layers.dense({
   units: 1,
-  // activation: 'sigmoid'
 }));
 
 model.summary();
-const learningRate = 0.002;
+const learningRate = 0.001;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -38,7 +37,7 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 
 (async function () {
 // Train the model using the data.
-  const history = await model.fit(inputTrain, outputTrain, { epochs: 5000});
+  const history = await model.fit(inputTrain, outputTrain, { epochs: 2000});
   console.log(history);
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {

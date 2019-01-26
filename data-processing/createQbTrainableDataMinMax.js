@@ -32,6 +32,7 @@ var minVertical = Math.min.apply(Math, qbDataDrafted.map(function(o) { return o.
 var maxBroad = Math.max.apply(Math, qbDataDrafted.map(function(o) { return o.broad }));
 var minBroad = Math.min.apply(Math, qbDataDrafted.map(function(o) { return o.broad ? o.broad : maxBroad }));
 
+// Also need to normalize the average values of each feature. If an player does not have a given feature in the data, the normalized average value will be imputed. If a player does not have any combine data, that player will not be used to train the model.
 var aveHeightNormalized = (qbAve.heightinchestotalAve - minHeight)/(maxHeight - minHeight);
 var aveWeightNormalized = (qbAve.weightAve - minWeight)/(maxWeight - minWeight);
 var aveFortyNormalized = (qbAve.fortyydAve - minForty)/(maxForty - minForty);
@@ -39,6 +40,10 @@ var aveTwentyNormalized = (qbAve.twentyssAve - minTwenty)/(maxTwenty - minTwenty
 var aveThreeNormalized = (qbAve.threeconeAve - minThree)/(maxThree - minThree);
 var aveVerticalNormalized = (qbAve.verticalAve - minVertical)/(maxVertical - minVertical);
 var aveBroadNormalized = (qbAve.broadAve - minBroad)/(maxBroad - minBroad);
+
+// Create a file called qbStats to hold average, min, and max for each feature
+var qbStats = {...qbAve, maxHeight, minHeight, maxWeight, minWeight, maxForty, minForty, maxTwenty, minTwenty, maxThree, minThree, maxVertical, minVertical, maxBroad, minBroad };
+fs.writeFileSync('../data/qb/qbStats.json', JSON.stringify(qbStats));
 
 
 qbDataDrafted.forEach((el, i) => {

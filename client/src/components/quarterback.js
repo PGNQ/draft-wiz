@@ -114,7 +114,7 @@ class Quarterback extends Component {
     return (
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around button-wrapper">
+         <div className="row button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>

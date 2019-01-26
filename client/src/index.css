@@ -35,7 +35,7 @@ hr {
 }
 
 img {
-  max-width: 200px;
+  max-width: 150px;
   margin: 20px;
 }
 
@@ -43,6 +43,10 @@ input {
   text-align: right;
   color: red;
   font-weight: 100;
+}
+
+button {
+  margin-right: 10px;
 }
 
 .title-main{
@@ -71,8 +75,8 @@ input {
 
 .content {
   background-color: rgb(255, 255, 255);
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-radius: 8px;
 }
 
@@ -91,6 +95,10 @@ input {
   min-width: 150px;
 }
 
+.input-group {
+  margin-bottom: 2px !important;
+}
+
 .results {
   margin-top: 10px;
   font-size: 20px;
@@ -98,6 +106,7 @@ input {
 
 .button-wrapper {
   margin-top: 15px;
+  justify-content: center;
 }
 
 ::-webkit-input-placeholder { text-align:right; }

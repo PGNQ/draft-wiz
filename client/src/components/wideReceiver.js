@@ -118,7 +118,7 @@ class WideReceiver extends Component {
     return (
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
-         <div className="row justify-content-around button-wrapper">
+         <div className="row button-wrapper">
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadReggieBrown} data-toggle="tooltip"  title="Round 2, Overall Pick 35 by Eagles">Reggie Brown</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKevinNorwood} data-toggle="tooltip"  title="Round 4, Overall Pick 123 by Seahawks">Kevin Norwood</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadAntonioBrown} data-toggle="tooltip"  title="Round 6, Overall Pick 195 by Steelers">Antonio Brown</button>

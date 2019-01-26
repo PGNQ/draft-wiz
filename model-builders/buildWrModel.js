@@ -1,7 +1,7 @@
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs');
-const train = JSON.parse(fs.readFileSync('../data/wr/wrTrain.JSON'));
-const test = JSON.parse(fs.readFileSync('../data/wr/wrTest.JSON'));
+const train = JSON.parse(fs.readFileSync('../data/wr/wrTrainMinMax.JSON'));
+const test = JSON.parse(fs.readFileSync('../data/wr/wrTestMinMax.JSON'));
 
 // Define a model
 const model = tf.sequential();
@@ -10,18 +10,17 @@ const model = tf.sequential();
 model.add(tf.layers.dense({
   units: 10, 
   inputShape: [train.numberOfFeatures],
-  activation: 'sigmoid',
-  kernelInitializer: 'randomNormal'
+  activation: 'relu6',
+  // kernelInitializer: 'zeros'
 }));
 
 // add output layer
 model.add(tf.layers.dense({
   units: 1,
-  // activation: 'sigmoid'
 }));
 
 model.summary();
-const learningRate = 0.001;
+const learningRate = 0.0002;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -44,5 +43,5 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 })().then(()=> {
   console.log('training complete');
   model.predict(tf.tensor(test.features, [10, 8])).print();
-  // model.save('file://../tensorflow-models/wr-model');
+  model.save('file://../tensorflow-models/wr-model');
 })

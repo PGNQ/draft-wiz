@@ -36,6 +36,7 @@ var minBroad = Math.min.apply(Math, rbDataDrafted.map(function(o) { return o.bro
 var maxBench = Math.max.apply(Math, rbDataDrafted.map(function(o) { return o.bench }));
 var minBench = Math.min.apply(Math, rbDataDrafted.map(function(o) { return o.bench ? o.bench : maxBench }));
 
+// Also need to normalize the average values of each feature. If an player does not have a given feature in the data, the normalized average value will be imputed. If a player does not have any combine data, that player will not be used to train the model.
 var aveHeightNormalized = (rbAve.heightinchestotalAve - minHeight)/(maxHeight - minHeight);
 var aveWeightNormalized = (rbAve.weightAve - minWeight)/(maxWeight - minWeight);
 var aveFortyNormalized = (rbAve.fortyydAve - minForty)/(maxForty - minForty);
@@ -44,6 +45,10 @@ var aveThreeNormalized = (rbAve.threeconeAve - minThree)/(maxThree - minThree);
 var aveVerticalNormalized = (rbAve.verticalAve - minVertical)/(maxVertical - minVertical);
 var aveBroadNormalized = (rbAve.broadAve - minBroad)/(maxBroad - minBroad);
 var aveBenchNormalized = (rbAve.benchAve - minBench)/(maxBench - minBench);
+
+// Create a file called qbStats to hold average, min, and max for each feature
+var rbStats = {...rbAve, maxHeight, minHeight, maxWeight, minWeight, maxForty, minForty, maxTwenty, minTwenty, maxThree, minThree, maxVertical, minVertical, maxBroad, minBroad, maxBench, minBench };
+fs.writeFileSync('../data/rb/rbStats.json', JSON.stringify(rbStats));
 
 rbDataDrafted.forEach((el, i) => {
    // Build the training data, first rejecting data for RBs that didn't attend the combine
