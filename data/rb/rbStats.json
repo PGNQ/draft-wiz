@@ -1,1 +1,26 @@
-{"heightinchestotalAve":70.83457446808511,"weightAve":214.41702127659573,"fortyydAve":4.526896551724138,"twentyssAve":4.228930817610063,"threeconeAve":6.993421052631578,"verticalAve":35.104651162790695,"broadAve":118.86666666666666,"benchAve":20.428571428571427,"maxHeight":76,"minHeight":66,"maxWeight":267,"minWeight":173,"maxForty":4.88,"minForty":4.24,"maxTwenty":4.67,"minTwenty":3.82,"maxThree":7.51,"minThree":6.5,"maxVertical":43.5,"minVertical":28,"maxBroad":137,"minBroad":103,"maxBench":36,"minBench":8}
+{
+   "heightinchestotalAve": 70.83457446808511,
+   "weightAve": 214.41702127659573,
+   "fortyydAve": 4.526896551724138,
+   "twentyssAve": 4.228930817610063,
+   "threeconeAve": 6.993421052631578,
+   "verticalAve": 35.104651162790695,
+   "broadAve": 118.86666666666666,
+   "benchAve": 20.428571428571427,
+   "maxHeight": 76,
+   "minHeight": 66,
+   "maxWeight": 267,
+   "minWeight": 173,
+   "maxForty": 4.88,
+   "minForty": 4.24,
+   "maxTwenty": 4.67,
+   "minTwenty": 3.82,
+   "maxThree": 7.51,
+   "minThree": 6.5,
+   "maxVertical": 43.5,
+   "minVertical": 28,
+   "maxBroad": 137,
+   "minBroad": 103,
+   "maxBench": 36,
+   "minBench": 8
+}

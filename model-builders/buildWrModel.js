@@ -8,7 +8,7 @@ const model = tf.sequential();
 
 //add hidden layer
 model.add(tf.layers.dense({
-  units: 10, 
+  units: 6, 
   inputShape: [train.numberOfFeatures],
   activation: 'relu6',
   // kernelInitializer: 'zeros'
@@ -37,11 +37,11 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 
 (async function () {
 // Train the model using the data.
-  const history = await model.fit(inputTrain, outputTrain, { epochs: 5000});
-  console.log(history);
+  const { history } = await model.fit(inputTrain, outputTrain, { epochs: 5000});
+  // fs.writeFileSync('../data/wr/wrHistory.json', JSON.stringify(history));
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {
   console.log('training complete');
   model.predict(tf.tensor(test.features, [10, 8])).print();
-  model.save('file://../tensorflow-models/wr-model');
+  // model.save('file://../tensorflow-models/wr-model');
 })

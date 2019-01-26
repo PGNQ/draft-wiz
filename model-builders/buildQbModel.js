@@ -8,7 +8,7 @@ const model = tf.sequential();
 
 //add hidden layer
 model.add(tf.layers.dense({
-  units: 10, 
+  units: 6, 
   inputShape: [train.numberOfFeatures],
   activation: 'relu6',
   // kernelInitializer: 'glorotNormal'
@@ -37,8 +37,8 @@ const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
 
 (async function () {
 // Train the model using the data.
-  const history = await model.fit(inputTrain, outputTrain, { epochs: 2000});
-  console.log(history);
+  const { history } = await model.fit(inputTrain, outputTrain, { epochs: 1000});
+  // fs.writeFileSync('../data/qb/qbHistory.json', JSON.stringify(history));
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {
   console.log('training complete');
