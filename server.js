@@ -18,9 +18,9 @@ app.use(cors());
 
 
 // Load all data/models and start the server
-const qbAve = JSON.parse(fs.readFileSync('./data/qb/qbDraftedAverages.JSON'));
-const rbAve = JSON.parse(fs.readFileSync('./data/rb/rbDraftedAverages.JSON'));
-const wrAve = JSON.parse(fs.readFileSync('./data/wr/wrDraftedAverages.JSON'));
+const qbStats = JSON.parse(fs.readFileSync('./data/qb/qbStats.JSON'));
+const rbStats = JSON.parse(fs.readFileSync('./data/rb/rbStats.JSON'));
+const wrStats = JSON.parse(fs.readFileSync('./data/wr/wrStats.JSON'));
 var qbModel;
 var rbModel;
 var wrModel;
@@ -49,41 +49,42 @@ app.post('/api/predict/:position', (req, res) => {
 
    if(position === 'qb') {
       model = qbModel;
-      modelAve = qbAve;
+      modelStats = qbStats;
    } else 
    if (position === 'rb') {
       model = rbModel;
-      modelAve = rbAve;
+      modelStats = rbStats;
    } else
    if (position === 'wr') {
       model = wrModel;
-      modelAve = wrAve;
+      modelStats = wrStats;
    }
 
+   // Incoming data needs to be normalized just like the training data, with a Min-Max normalization, before a meaningful prediction can be made on the model
    var height = parseInt(req.body.height);
-   var heightNormal = height - modelAve.heightinchestotalAve;
+   var heightNormal = (height - modelStats.minHeight) / (modelStats.maxHeight - modelStats.minHeight);
    var weight = parseInt(req.body.weight);
-   var weightNormal = weight - modelAve.weightAve;
+   var weightNormal = (weight - modelStats.minWeight) / (modelStats.maxWeight - modelStats.minWeight);
    var forty = parseInt(req.body.forty);
-   var fortyNormal = forty - modelAve.fortyydAve;
+   var fortyNormal = (forty - modelStats.minForty) / (modelStats.maxForty - modelStats.minForty);
    var twentyss = parseInt(req.body.twentyss);
-   var twentyssNormal = twentyss - modelAve.twentyssAve;
+   var twentyssNormal = (twentyss - modelStats.minTwenty) / (modelStats.maxTwenty - modelStats.minTwenty);
    var threecone = parseInt(req.body.threecone);
-   var threeconeNormal = threecone - modelAve.threeconeAve;
+   var threeconeNormal = (threecone - modelStats.minThree) / (modelStats.maxThree - modelStats.minThree);
    var vertical = parseInt(req.body.vertical);
-   var verticalNormal = vertical - modelAve.verticalAve;
+   var verticalNormal = (vertical - modelStats.minVertical) / (modelStats.maxVertical - modelStats.minVertical);
    var broad = parseInt(req.body.broad);
-   var broadNormal = broad - modelAve.broadAve;
+   var broadNormal = (broad - modelStats.minBroad) / (modelStats.maxBroad - modelStats.minBroad);
    if (position === 'rb' || position === 'wr' ) {
       var bench = parseInt(req.body.bench);
-      var benchNormal = bench - modelAve.benchAve;
+      var benchNormal = (bench - modelStats.minBench) / (modelStats.maxBench - modelStats.minBench);
    }
 
    const y = tf.tidy(()=> {
       var prediction;
       (async function(){
 
-         // Use the appropriate prediction statement. QB has 7 features to predict, whereas RB and WR have the same 8 
+         // Use the appropriate prediction statement. QB has 7 features to predict, whereas RB and WR have the same 8. It's important to note that the order of features matter. The order must match the order used by the training data when the model was trained.
          if (position === 'qb') {
             prediction = await model.predict(tf.tensor([heightNormal, weightNormal, fortyNormal, twentyssNormal, threeconeNormal, verticalNormal, broadNormal], [1, 7])).data();
          } else {
