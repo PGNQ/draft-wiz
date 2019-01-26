@@ -25,20 +25,29 @@ const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
   loss: 'meanSquaredError', 
-  optimizer: sgdOpt
+  optimizer: sgdOpt,
+  metrics: ['mae']
 });
 
 // Create tensors of the training data
 const inputTrain = tf.tensor(train.features, [train.output.length, train.numberOfFeatures]);
-// console.log('input tensors: ', inputTrain)
 const outputTrain = tf.tensor(train.output, [train.output.length, 1]);
-// console.log('output tensors: ', outputTrain)
+
+
+// Create tensors of the validation data
+const inputTest = tf.tensor(test.features, [test.output.length, test.numberOfFeatures]); 
+const outputTest = tf.tensor(test.output, [test.output.length, 1]);
 
 
 (async function () {
 // Train the model using the data.
-  const { history } = await model.fit(inputTrain, outputTrain, { epochs: 2000});
+  const history = await model.fit(inputTrain, outputTrain, 
+    { 
+      epochs: 100,
+      validationData: [inputTest, outputTest]
+    });
    // fs.writeFileSync('../data/rb/rbHistory.json', JSON.stringify(history));
+  console.log(history);
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {
   console.log('training complete');
