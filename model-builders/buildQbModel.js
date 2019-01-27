@@ -11,7 +11,7 @@ model.add(tf.layers.dense({
   units: 6, 
   inputShape: [train.numberOfFeatures],
   activation: 'relu6',
-  // kernelInitializer: 'glorotNormal'
+  // kernelInitializer: 'zeros'
 }));
 
 // add output layer
@@ -20,7 +20,7 @@ model.add(tf.layers.dense({
 }));
 
 model.summary();
-const learningRate = 0.001;
+const learningRate = 0.0018;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -43,8 +43,8 @@ const outputTest = tf.tensor(test.output, [test.output.length, 1]);
 // Train the model using the data.
   const  history  = await model.fit(inputTrain, outputTrain, 
     { 
-      epochs: 100, 
-      validationData: [inputTest, outputTest]
+      epochs: 700, 
+      validationData: [inputTest, outputTest],
     });
   // fs.writeFileSync('../data/qb/qbHistory.json', JSON.stringify(history));
   console.log(history);

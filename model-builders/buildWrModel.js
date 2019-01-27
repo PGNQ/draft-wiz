@@ -20,7 +20,7 @@ model.add(tf.layers.dense({
 }));
 
 model.summary();
-const learningRate = 0.0002;
+const learningRate = 0.0005;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -43,7 +43,7 @@ const outputTest = tf.tensor(test.output, [test.output.length, 1]);
   // Train the model using the data.
   const  history  = await model.fit(inputTrain, outputTrain, 
     { 
-      epochs: 100, 
+      epochs: 200, 
       validationData: [inputTest, outputTest]
     });
   // fs.writeFileSync('../data/wr/wrHistory.json', JSON.stringify(history));

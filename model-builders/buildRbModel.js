@@ -8,19 +8,20 @@ const model = tf.sequential();
 
 //add hidden layer
 model.add(tf.layers.dense({
-  units: 6, 
+  units: 9, 
   inputShape: [train.numberOfFeatures],
-  activation: 'relu6',
-  // kernelInitializer: 'randomNormal'
+  activation: 'sigmoid',
+  kernelInitializer: 'randomNormal'
 }));
 
 // add output layer
 model.add(tf.layers.dense({
   units: 1,
+  activation: 'linear'
 }));
 
 model.summary();
-const learningRate = 0.001;
+const learningRate = 0.0008;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -43,10 +44,10 @@ const outputTest = tf.tensor(test.output, [test.output.length, 1]);
 // Train the model using the data.
   const history = await model.fit(inputTrain, outputTrain, 
     { 
-      epochs: 100,
+      epochs: 4000,
       validationData: [inputTest, outputTest]
     });
-   // fs.writeFileSync('../data/rb/rbHistory.json', JSON.stringify(history));
+  //  fs.writeFileSync('../data/rb/rbHistory.json', JSON.stringify(history));
   console.log(history);
   console.log('number of samples: ',train.features.length/train.numberOfFeatures);
 })().then(()=> {

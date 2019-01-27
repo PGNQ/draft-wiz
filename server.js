@@ -42,10 +42,8 @@ var wrModel;
 
 app.post('/api/predict/:position', (req, res) => {
    
-   console.log('req:', req);
    var position = req.params.position;
    var model = null;
-   var modelAve = null;
 
    if(position === 'qb') {
       model = qbModel;
