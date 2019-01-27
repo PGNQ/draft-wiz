@@ -39,6 +39,7 @@ class WideReceiver extends Component {
     target.style.color = 'darkblue';
     target.style['font-weight'] = 'bold';
     this.setState({ presetPlayer: false });
+    $('.player').removeClass('active');
   }
 
   handleSubmit = () => {
@@ -79,6 +80,8 @@ class WideReceiver extends Component {
     };
     var message = "Round 2, #35 overall by Eagles";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#reggie`).addClass('active');
   }
 
   loadKevinNorwood = () => {
@@ -96,6 +99,8 @@ class WideReceiver extends Component {
     };
     var message = "Round 4, #123 overall by Seahawks";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#kevin`).addClass('active');
   }
 
   loadAntonioBrown = () => {
@@ -113,6 +118,8 @@ class WideReceiver extends Component {
     };
     var message = "Round 6, #195 overall by Steelers";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#antonio`).addClass('active');
   }
 
   render() {
@@ -120,9 +127,9 @@ class WideReceiver extends Component {
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
          <div className="row button-wrapper">
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadReggieBrown} data-toggle="tooltip"  title="Round 2, Overall Pick 35 by Eagles">Reggie Brown</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKevinNorwood} data-toggle="tooltip"  title="Round 4, Overall Pick 123 by Seahawks">Kevin Norwood</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadAntonioBrown} data-toggle="tooltip"  title="Round 6, Overall Pick 195 by Steelers">Antonio Brown</button>
+            <button id="reggie" value="reggie" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadReggieBrown} data-toggle="tooltip"  title="Round 2, Overall Pick 35 by Eagles">Reggie Brown</button>
+            <button id="kevin" value="kevin" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadKevinNorwood} data-toggle="tooltip"  title="Round 4, Overall Pick 123 by Seahawks">Kevin Norwood</button>
+            <button id="antonio" value="antonio"type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadAntonioBrown} data-toggle="tooltip"  title="Round 6, Overall Pick 195 by Steelers">Antonio Brown</button>
          </div> 
          <img className="mx-auto d-block" src={wrLogo}  alt="wide receiver"></img>
          <div className="container input-container">

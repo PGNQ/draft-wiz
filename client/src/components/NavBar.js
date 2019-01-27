@@ -14,6 +14,7 @@ class NavBar extends Component {
    }
 
    componentDidMount() {
+      // In order to make the menu tab active for the url, pull the path from location props and select tab with that id to add an 'active' class.
       if(this.props.location.pathname !== '/') {
          var pathname = this.props.location.pathname.substring(1);
          $('.nav-link').removeClass('active');
@@ -26,7 +27,7 @@ class NavBar extends Component {
    return (
       <Fragment>
          <div className="container title-main">
-            <h1 className="mx-auto text-outline">Draft Wiz</h1>
+            <h1 className="mx-auto text-outline headline-title">Draft Wiz</h1>
          </div>
          <div className="container menu">
             <ul className="nav nav-tabs">

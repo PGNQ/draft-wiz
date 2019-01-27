@@ -39,6 +39,7 @@ class Runningback extends Component {
     target.style.color = 'darkblue';
     target.style['font-weight'] = 'bold';
     this.setState({ presetPlayer: false });
+    $('.player').removeClass('active');
   }
 
   handleSubmit = () => {
@@ -79,6 +80,8 @@ class Runningback extends Component {
     };
     var message = "Round 1, #17 overall by Falcons";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#keanu`).addClass('active');
  }
 
  loadNoahHerron = () => {
@@ -96,6 +99,8 @@ class Runningback extends Component {
     };
     var message = "Round 7, #244 overall by Steelers";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#noah`).addClass('active');
  }
 
  loadKenyanDrake = () => {
@@ -113,6 +118,8 @@ class Runningback extends Component {
     };
     var message = "Round 3, #73 overall by Dolphins";
     this.setState({ input: stats, presetPlayer: true, message: message });
+    $('.player').removeClass('active');
+    $(`#kenyan`).addClass('active');
  }
 
   render() {
@@ -120,9 +127,9 @@ class Runningback extends Component {
       <div className="container content"> 
          <h6 className="text-center">Load existing player or create your own!</h6>
          <div className="row button-wrapper">
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKeanuNeal} data-toggle="tooltip"  title="Round 1, Overall Pick 17 by Falcons">Keanu Neal</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
+            <button id="keanu" value="keanu" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadKeanuNeal} data-toggle="tooltip"  title="Round 1, Overall Pick 17 by Falcons">Keanu Neal</button>
+            <button id="noah" value="noah" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
+            <button id="kenyan" value="kenyan" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
          </div>     
          <img className="mx-auto d-block" src={rbLogo} alt="runningback"></img>
          <div className="container input-container">

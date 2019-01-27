@@ -38,6 +38,7 @@ class Quarterback extends Component {
       target.style.color = 'darkblue';
       target.style['font-weight'] = 'bold';
       this.setState({ presetPlayer: false });
+      $('.player').removeClass('active');
    }
 
    handleSubmit = () => {
@@ -77,6 +78,8 @@ class Quarterback extends Component {
       };
       var message = "Round 6, #199 overall by Patriots";
       this.setState({ input: stats, presetPlayer: true, message: message });
+      $('.player').removeClass('active');
+      $(`#tom`).addClass('active');
    }
 
    loadDrewBrees = () => {
@@ -93,6 +96,8 @@ class Quarterback extends Component {
       };
       var message = "Round 2, #32 overall by Chargers";
       this.setState({ input: stats, presetPlayer: true, message: message });
+      $('.player').removeClass('active');
+      $(`#drew`).addClass('active');
    }
 
    loadCamNewton = () => {
@@ -109,6 +114,8 @@ class Quarterback extends Component {
       };
       var message = "Round 1, #1 overall by Panthers";
       this.setState({ input: stats, presetPlayer: true, message: message });
+      $('.player').removeClass('active');
+      $(`#cam`).addClass('active');
    }
 
   render() {
@@ -116,9 +123,9 @@ class Quarterback extends Component {
       <div className="container content">
          <h6 className="text-center">Load existing player or create your own!</h6>
          <div className="row button-wrapper">
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
-            <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
+            <button id="tom" value="tom" type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadTomBrady} data-toggle="tooltip"  title="Round 6, Overall Pick 199 by Patriots">Tom Brady</button>
+            <button id="drew" value="drew"type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
+            <button id="cam" value="cam"type="button" className="btn btn-outline-primary btn-sm player" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
          </div>
          <img className="mx-auto d-block" src={qbLogo}  alt="quarterback"></img> 
          <div className="container input-container">

@@ -54,7 +54,7 @@ const options = {
     xAxes: [{
       scaleLabel: {
         display: true,
-        labelString: 'Epochs'
+        labelString: 'Epochs (Iterations of Training)'
       },
       ticks: {
         maxTicksLimit: 15
@@ -63,7 +63,7 @@ const options = {
     yAxes: [{
       scaleLabel: {
         display: true,
-        labelString: 'Mean Absolute Error [Pick Total]'
+        labelString: 'Mean Absolute Error (Pick Total)'
       }
     }],
   }
