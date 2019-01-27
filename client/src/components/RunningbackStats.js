@@ -12,7 +12,7 @@ const rbChartData = {
       backgroundColor: 'rgba(75,192,192,1)',
       borderColor: 'rgba(75,192,192,1)',
       pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
+      pointBackgroundColor: 'rgba(75,192,192,1)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -33,7 +33,7 @@ const rbChartData = {
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
       pointBorderColor: 'rgba(75,122,19,1)',
-      pointBackgroundColor: '#fff',
+      pointBackgroundColor: 'rgba(75,122,19,1)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: 'rgba(75,122,19,1)',
@@ -66,6 +66,19 @@ const options = {
         labelString: 'Mean Absolute Error (Pick Total)'
       }
     }],
+  },
+  tooltips: {
+    callbacks: {
+        label: function(tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            if (label) {
+                label += ': ';
+            }
+            label += Math.round(tooltipItem.yLabel * 100) / 100;
+            return label;
+        }
+    }
   }
 };
 
