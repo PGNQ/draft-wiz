@@ -20,6 +20,7 @@ class Predict extends Component {
   render() {
     return (
       <div className="container content">
+        <h6 className="text-center">Pick a position</h6>
         <div className="row button-wrapper">
           <button id="qb" type="button" className="btn btn-outline-primary btn-sm active" value="qb" onClick={(e) => this.onClick(e)}>Quarterback</button>
           <button id="rb" type="button" className="btn btn-outline-primary btn-sm" value="rb" onClick={(e) => this.onClick(e)}>Running Back</button>

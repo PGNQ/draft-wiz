@@ -29,7 +29,7 @@ h3 {
 
 p {
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 hr {
@@ -51,6 +51,16 @@ input {
 
 button {
   margin-right: 10px;
+}
+
+ul { 
+  padding-left:20px; 
+  list-style:circle;
+  margin-top: 10px;
+}
+li { margin-bottom: 4px; }
+li:before {    
+    margin:0 5px 0 -15px;
 }
 
 .chart-container {
