@@ -1,104 +1,32 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import {Line} from 'react-chartjs-2';
-import { qbData } from '../data/History/qbHistory';
-
-const qbChartData = {
-  labels: qbData.epoch,
-  xAxisID: "Epoch",
-  datasets: [
-    {
-      label: 'Training MAE',
-      fill: false,
-      backgroundColor: 'rgba(75,192,192,1)',
-      borderColor: 'rgba(75,192,192,1)',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: qbData.history.mae
-    },
-    {
-      label: 'Validation MAE',
-      fill: false,
-      lineTension: 0,
-      backgroundColor: 'rgba(75,122,19,1)',
-      borderColor: 'rgba(75,122,19,1)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,122,19,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,122,19,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: qbData.history.val_mae
-    }
-  ],
-};
-
-const options = {
-  animation: {
-    duration: 0
-  },
-  scales:{
-    xAxes: [{
-      scaleLabel: {
-        display: true,
-        labelString: 'Epochs'
-      },
-      ticks: {
-        maxTicksLimit: 15
-      },
-    }],
-    yAxes: [{
-      scaleLabel: {
-        display: true,
-        labelString: 'Mean Absolute Error'
-      }
-    }],
-  }
-};
+import QuarterbackStats from './QuarterbackStats';
+import RunningbackStats from './RunningbackStats';
+import WideReceiverStats from './WideReceiverStats';
 
 class Explore extends Component {
+
+  state = {
+    position: null,
+  };
+
+  onClick = (e) => {
+   this.setState({ position: e.target.value });
+  }
+
   render() {
     return (
       <div className="container content">
-       <h3>Explore the Feedforward Regression neural network models used in this app</h3><hr/>
+        <h6 className="text-center">Explore the Feedforward Regression neural network models used in this app. Select a position.</h6>
+        <div className="row button-wrapper">
+          <button type="button" className="btn btn-outline-primary btn-sm" value="qb" onClick={(e) => this.onClick(e)}>Quarterback</button>
+          <button type="button" className="btn btn-outline-primary btn-sm" value="rb" onClick={(e) => this.onClick(e)}>Running Back</button>
+          <button type="button" className="btn btn-outline-primary btn-sm" value="wr" onClick={(e) => this.onClick(e)}>Wide Receiver</button>
+        </div>
 
-       <h2>Quarterback</h2>
-       <p>Number of layers: 3</p>
-       <p>Features trained: 7</p>
-       <p>Number of nodes in the hidden layer: 6</p>
-       <div id="qbChart" className="chart-container">
-        <Line data={qbChartData} options={options}/>
-       </div>
-
-       <h2>Running Back</h2>
-       <p>Number of layers: 3</p>
-       <p>Features trained: 8</p>
-       <p>Number of nodes in the hidden layer: 9</p>
-       <div id="rbChart" className="chart-container">
-        <Line />
-       </div>
-
-       <h2>Wide Receiver</h2>
-       <p>Number of layers: 3</p>
-       <p>Features trained: 8</p>
-       <p>Number of nodes in the hidden layer: 6</p>
-       <div id="wrChart" className="chart-container">
-        <Line />
-       </div>
+        {this.state.position === 'qb' ? <QuarterbackStats /> : null}
+        {this.state.position === 'rb' ? <RunningbackStats /> : null}
+        {this.state.position === 'wr' ? <WideReceiverStats /> : null}
       </div>
     );
   }

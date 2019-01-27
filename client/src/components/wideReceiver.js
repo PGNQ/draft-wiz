@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery';
+import wrLogo from '../data/widereceiver.png';
 
 class WideReceiver extends Component {
 
@@ -123,7 +124,7 @@ class WideReceiver extends Component {
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKevinNorwood} data-toggle="tooltip"  title="Round 4, Overall Pick 123 by Seahawks">Kevin Norwood</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadAntonioBrown} data-toggle="tooltip"  title="Round 6, Overall Pick 195 by Steelers">Antonio Brown</button>
          </div> 
-         <img className="mx-auto d-block" src="https://images-na.ssl-images-amazon.com/images/I/51GMVJ1zwEL._SX425_.jpg"  alt="wide receiver"></img>
+         <img className="mx-auto d-block" src={wrLogo}  alt="wide receiver"></img>
          <div className="container input-container">
             <p className="input-message">Please complete all fields with numbers only.</p>
             <p className="input-message">Fields preloaded with average values from 1999-2015.</p>

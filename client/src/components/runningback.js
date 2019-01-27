@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery';
+import rbLogo from '../data/runningback.png';
 
 class Runningback extends Component {
 
@@ -123,7 +124,7 @@ class Runningback extends Component {
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadNoahHerron} data-toggle="tooltip"  title="Round 7, Overall Pick 244 by Steelers">Noah Herron</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadKenyanDrake} data-toggle="tooltip"  title="Round 3, Overall Pick 73 by Dolphins">Kenyan Drake</button>
          </div>     
-         <img className="mx-auto d-block" src="https://images-na.ssl-images-amazon.com/images/I/417Yg63btmL._SX425_.jpg"  alt="runningback"></img>
+         <img className="mx-auto d-block" src={rbLogo} alt="runningback"></img>
          <div className="container input-container">
             <p className="input-message">Please complete all fields with numbers only.</p>
             <p className="input-message">Fields preloaded with average values from 1999-2015.</p>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import $ from 'jquery';
+import qbLogo from '../data/quarterback.png';
 
 class Quarterback extends Component {
 
@@ -119,7 +120,7 @@ class Quarterback extends Component {
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadDrewBrees} data-toggle="tooltip"  title="Round 2, Overall Pick 32 by Chargers">Drew Brees</button>
             <button type="button" className="btn btn-outline-primary btn-sm" onClick={this.loadCamNewton} data-toggle="tooltip"  title="Round 1, Overall Pick 1 by Panthers">Cam Newton</button>
          </div>
-         <img className="mx-auto d-block" src="https://i.pinimg.com/originals/bb/a7/2f/bba72fb432a4f2050539818b0152bead.jpg"  alt="quarterback"></img> 
+         <img className="mx-auto d-block" src={qbLogo}  alt="quarterback"></img> 
          <div className="container input-container">
             <p className="input-message">Please complete all fields with numbers only.</p>
             <p className="input-message">Fields preloaded with average values from 1999-2015.</p>
