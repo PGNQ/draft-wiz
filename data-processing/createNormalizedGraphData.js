@@ -1,3 +1,7 @@
+/*
+The purpose of this file is to create an array of data points, [{x: #, y:#}], for each position, to be used by the scatter plot graphs. The x positions will be integer values 0 to N, where N is (number of features of each model - 1). Y is the normalized value of that data point.
+*/
+
 const fs = require('fs');
 const qbTrain = JSON.parse(fs.readFileSync('../data/qb/qbTrainMinMax.JSON'));
 const rbTrain = JSON.parse(fs.readFileSync('../data/rb/rbTrainMinMax.JSON'));
