@@ -1,7 +1,20 @@
+/*
+Executing "Node buildRbModel.js" will perform the following:
+
+1. Build, train, and save a Tensorflow model. 
+2. Write the results of the model's training (loss vs epoch).
+
+*/
+
 const tf = require('@tensorflow/tfjs-node');
 const fs = require('fs');
 const train = JSON.parse(fs.readFileSync('../data/rb/rbTrainMinMax.JSON'));
 const test = JSON.parse(fs.readFileSync('../data/rb/rbTestMinMax.JSON'));
+
+//Commonly adjustable parameters of a model to be trained:
+const ACTIVATION = 'sigmoid';
+const LEARNINGRATE = 0.0008;
+const EPOCHS = 4000;
 
 // Define a model
 const model = tf.sequential();
@@ -10,7 +23,7 @@ const model = tf.sequential();
 model.add(tf.layers.dense({
   units: 9, 
   inputShape: [train.numberOfFeatures],
-  activation: 'sigmoid',
+  activation: ACTIVATION,
   kernelInitializer: 'randomNormal'
 }));
 
@@ -21,7 +34,7 @@ model.add(tf.layers.dense({
 }));
 
 model.summary();
-const learningRate = 0.0008;
+const learningRate = LEARNINGRATE;
 const sgdOpt = tf.train.sgd(learningRate);
 
 model.compile({
@@ -44,7 +57,7 @@ const outputTest = tf.tensor(test.output, [test.output.length, 1]);
 // Train the model using the data.
   const history = await model.fit(inputTrain, outputTrain, 
     { 
-      epochs: 4000,
+      epochs: EPOCHS,
       validationData: [inputTest, outputTest]
     });
   //  fs.writeFileSync('../data/rb/rbHistory.json', JSON.stringify(history));

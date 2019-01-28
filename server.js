@@ -15,9 +15,8 @@ app.use(function( req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-// Serve static files from the React app
+// Serve static files from the React app upon deployment
 app.use(express.static(path.join(__dirname, 'client/build')));
-
 
 // Load all data/models and start the server
 const qbStats = JSON.parse(fs.readFileSync('./data/qb/qbStats.JSON'));
@@ -27,6 +26,7 @@ var qbModel;
 var rbModel;
 var wrModel;
 
+//only start the server once the models are loaded. 
 (async function () {
    console.log('Loading models');
    qbModel = await tf.loadModel('file://./tensorflow-models/qb-model/model.JSON');
@@ -34,14 +34,18 @@ var wrModel;
    wrModel = await tf.loadModel('file://./tensorflow-models/wr-model/model.JSON');
    console.log('Models loaded');
 
-   //only start the server once the models are loaded
    app.listen(port, () => {
       console.log('Node.js listening on port ' + port);
    });
 })()
 
-
-
+/*
+POST route will perform the following actions:
+1. Look at params value, and set the model and modelStats accordingly.
+2. Normalize the input values.
+3. Make a prediction on the appropriate model.
+4. Return a JSON with the total pick and the round.
+*/
 app.post('/api/predict/:position', (req, res) => {
    
    var position = req.params.position;
@@ -80,6 +84,7 @@ app.post('/api/predict/:position', (req, res) => {
       var benchNormal = (bench - modelStats.minBench) / (modelStats.maxBench - modelStats.minBench);
    }
 
+   // tf.tidy() is a Tensorflow function to manage the disposal of Tensors once the function is exited. Tensors aren't subject to automatic garbage collection because there is a C++ binding to TensorflowJS-node.
    const y = tf.tidy(()=> {
       var prediction;
       (async function(){
@@ -93,6 +98,7 @@ app.post('/api/predict/:position', (req, res) => {
 
          console.log('Prediction from user data: ', prediction[0]);
          console.log('memory: ', tf.memory());
+
          res.send(
             {
                pick: prediction[0],
@@ -105,7 +111,7 @@ app.post('/api/predict/:position', (req, res) => {
  });
 
 // The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
+// match one above, send back React's index.html file (after deployment).
 app.get('*', (req, res) => {
    res.sendFile(path.join(__dirname+'/client/build/index.html'));
  });
