@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Line, Scatter } from 'react-chartjs-2';
 import { wrData } from '../data/History/wrHistory';
+import { wrStatsNormalized } from '../data/Stats/wrStatsNormalized.js';
 
-const wrChartData = {
+const wrLossChart = {
   labels: wrData.epoch,
   xAxisID: "Epoch",
   datasets: [
     {
       label: 'Training MAE',
       fill: false,
-      backgroundColor: 'rgba(75,192,192,1)',
-      borderColor: 'rgba(75,192,192,1)',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: 'rgba(75,192,192,1)',
+      backgroundColor: 'rgb(44, 165, 236)',
+      borderColor: 'rgb(44, 165, 236)',
+      pointBorderColor: 'rgb(44, 165, 236)',
+      pointBackgroundColor: 'rgb(44, 165, 236)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -26,17 +27,17 @@ const wrChartData = {
       label: 'Validation MAE',
       fill: false,
       lineTension: 0,
-      backgroundColor: 'rgba(75,122,19,1)',
-      borderColor: 'rgba(75,122,19,1)',
+      backgroundColor: 'rgb(255, 196, 35)',
+      borderColor: 'rgb(255, 196, 35)',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,122,19,1)',
-      pointBackgroundColor: 'rgba(75,122,19,1)',
+      pointBorderColor: 'rgb(255, 196, 35)',
+      pointBackgroundColor: 'rgb(255, 196, 35)',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,122,19,1)',
+      pointHoverBackgroundColor: 'rgb(255, 196, 35)',
       pointHoverBorderColor: 'rgba(220,220,220,1)',
       pointHoverBorderWidth: 2,
       pointRadius: 1,
@@ -46,7 +47,7 @@ const wrChartData = {
   ],
 };
 
-const options = {
+const lossOptions = {
   animation: {
     duration: 0
   },
@@ -82,18 +83,48 @@ const options = {
   }
 };
 
+const wrStatsChart = {
+  labels: ['Scatter'],
+  datasets: [
+    {
+      label: '0-Height, 1-Weight, 2-Forty, 3-TwentySS, 4-ThreeCone, 5-Vertical, 6-Broad, 7-Bench',
+      fill: false,
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      pointBorderColor: 'rgba(75,192,192,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 2,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 2,
+      pointHitRadius: 10,
+      data: wrStatsNormalized,
+    }
+  ]
+};
+
 class WideReceiverStats extends Component {
 
   render() {
     return (
       <div className="container content">
 
-       <h2>Wide Receiver</h2>
+       <h2>Wide Receiver Model</h2>
        <p>Number of layers: 3</p>
        <p>Features trained: 8</p>
        <p>Number of nodes in the hidden layer: 6</p>
-       <div id="wrChart" className="chart-container">
-         <Line data={wrChartData} options={options}/>
+       <div id="wrLossChart" className="chart-container">
+         <Line data={wrLossChart} options={lossOptions}/>
+       </div>
+
+       <h2>Wide Receiver Data</h2>
+       <p>Training sample size: 385</p>
+       <p>Validation sample size: 10</p>
+       <p>Normalization used: Min-Max (0 to 1)</p>
+
+       <div id="wrStatsChart" className="chart-container">
+          <Scatter data={wrStatsChart} options={{legend:{position: "bottom"}}}/>
        </div>
        
       </div>

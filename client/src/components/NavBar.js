@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { FaHome, FaInfoCircle } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import $ from 'jquery';
 
 class NavBar extends Component {
