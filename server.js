@@ -97,6 +97,7 @@ app.post('/api/predict/:position', (req, res) => {
             {
                pick: prediction[0],
                round: Math.round(prediction[0]/32 + 1)
+               
             }
          );
       })()
