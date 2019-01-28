@@ -48,9 +48,6 @@ const qbLossChart = {
 };
 
 const lossOptions = {
-  animation: {
-    duration: 0
-  },
   scales:{
     xAxes: [{
       scaleLabel: {

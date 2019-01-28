@@ -5,16 +5,18 @@ const tf = require('@tensorflow/tfjs-node');
 const port = process.env.PORT || 7000;
 const fs = require('fs');
 const cors = require('cors');
+const path = require('path');
 
 // Middleware functions
 app.use(function( req, res, next) {
    console.log(`${new Date()} - ${req.method} request for ${req.url}`);
    next();
 });
-app.use(express.static("./static"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 // Load all data/models and start the server
@@ -99,6 +101,12 @@ app.post('/api/predict/:position', (req, res) => {
          );
       })()
    });
+ });
+
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname+'/client/build/index.html'));
  });
 
 
