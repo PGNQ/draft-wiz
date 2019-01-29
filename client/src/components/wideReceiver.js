@@ -17,7 +17,7 @@ class WideReceiver extends Component {
        bench: 15.21
     }, 
     "result": null,
-    "url": "http://localhost:7000/api/predict/wr",
+    "url": "/api/predict/wr",
     "presetPlayer": false,
     "message": ''
  };

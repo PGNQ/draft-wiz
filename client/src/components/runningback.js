@@ -17,7 +17,7 @@ class Runningback extends Component {
        bench: 20.43
     }, 
     "result": null,
-    "url": "http://localhost:7000/api/predict/rb",
+    "url": "/api/predict/rb",
     "presetPlayer": false,
     "message": ''   
  };

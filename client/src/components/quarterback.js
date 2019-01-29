@@ -16,7 +16,7 @@ class Quarterback extends Component {
          broad: 110.67
       }, 
       "result": null,
-      "url": "http://localhost:7000/api/predict/qb",
+      "url": "/api/predict/qb",
       "presetPlayer": false,
       "message": ''
    };
